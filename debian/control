@@ -1,0 +1,77 @@
+Source: wayfire
+Section: x11
+Priority: optional
+Maintainer: Muqtadir <contact@muqtxdir.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ meson (>= 0.64.0),
+ ninja-build,
+ pkgconf,
+ cmake,
+ libcairo2-dev,
+ libdrm-dev,
+ libegl-dev,
+ libevdev-dev,
+ libgbm-dev,
+ libgles-dev,
+ libglm-dev,
+ libinput-dev (>= 1.7.0),
+ libjpeg-dev,
+ libpango1.0-dev,
+ libpixman-1-dev,
+ libpng-dev,
+ libudev-dev,
+ libvulkan-dev,
+ libwayland-bin,
+ libwayland-dev,
+ libxcb1-dev,
+ libxkbcommon-dev,
+ libxml2-dev,
+ libyyjson-dev,
+ wayland-protocols (>= 1.37),
+ libdisplay-info-dev,
+ libliftoff-dev,
+ libseat-dev,
+ libwlroots-0.20-dev,
+ libwf-config-dev (>= 0.11.0),
+ libwf-config-dev (<< 0.12.0),
+Standards-Version: 4.7.0
+Homepage: https://github.com/WayfireWM/wayfire
+Rules-Requires-Root: no
+Vcs-Browser: https://github.com/unity-desktop/wayfire/tree/ubuntu/latest
+Vcs-Git: https://github.com/unity-desktop/wayfire.git -b ubuntu/latest
+
+Package: wayfire
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: 3D wlroots-based Wayland compositor
+ Wayfire is a Wayland compositor inspired by Compiz and built on wlroots. It
+ aims to be customizable, extendable and lightweight without sacrificing its
+ appearance.
+ .
+ This package contains the compositor, its bundled plugins and the session
+ entry used by display managers.
+
+Package: wayfire-dev
+Section: libdevel
+Architecture: any
+Depends:
+ wayfire (= ${binary:Version}),
+ python3,
+ libwf-config-dev,
+ libwlroots-0.20-dev,
+ libdrm-dev,
+ libinput-dev,
+ libpixman-1-dev,
+ libwayland-dev,
+ libxkbcommon-dev,
+ ${misc:Depends},
+Recommends:
+ git,
+ meson,
+ ninja-build,
+Description: 3D wlroots-based Wayland compositor (development files)
+ Wayfire is a Wayland compositor inspired by Compiz and built on wlroots.
+ .
+ This package contains the headers and the pkg-config file required to build
+ out-of-tree Wayfire plugins, and wayfire-plugin, which builds and installs them.

@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+%:
+	dh $@ --buildsystem=meson
+
+# Use wlroots from the archive and our wf-config, never the bundled copies.
+# wf-json, wf-utils and wf-touch have no packages, so they build from subprojects/.
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-Duse_system_wlroots=enabled \
+		-Duse_system_wfconfig=enabled \
+		-Dtests=disabled
+
+# wf-utils and the plugin helper libraries are private to the wayfire package.
+override_dh_shlibdeps:
+	dh_shlibdeps -l$(CURDIR)/debian/wayfire/usr/lib/$(DEB_HOST_MULTIARCH)
+
+override_dh_missing:
+	dh_missing --list-missing
+
+# Upstream's release tarball holds the submodules, so the orig tarball is theirs.
+get-orig-source:
+	uscan --download-current-version --rename --destdir ..
+
+.PHONY: get-orig-source

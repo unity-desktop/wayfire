@@ -1,0 +1,9 @@
+# In-place build state.
+/.debhelper/
+/debhelper-build-stamp
+/files
+/*.substvars
+/*.debhelper.log
+/tmp/
+/wayfire/
+/wayfire-dev/

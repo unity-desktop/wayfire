@@ -1,0 +1,2 @@
+# Our workflow, and the wlroots-vkfx submodule that the release tarball leaves empty.
+extend-diff-ignore = "^(\.github/workflows/wayfire\.yaml|subprojects/wlroots-vkfx/.*)$"

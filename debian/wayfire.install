@@ -1,0 +1,9 @@
+usr/bin/wayfire
+usr/lib/*/libwf-utils.so.*
+usr/lib/*/libwayfire-*.so
+usr/lib/*/wayfire/
+usr/share/locale/
+usr/share/wayfire/
+usr/share/wayland-sessions/
+usr/share/xdg-desktop-portal/
+usr/share/man/man1/wayfire.1
