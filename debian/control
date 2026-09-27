@@ -41,9 +41,50 @@ Rules-Requires-Root: no
 Vcs-Browser: https://github.com/unity-desktop/wayfire/tree/ubuntu/latest
 Vcs-Git: https://github.com/unity-desktop/wayfire.git -b ubuntu/latest
 
+Package: libwf-utils0
+Architecture: any
+Multi-Arch: same
+Conflicts: libwf-utils0t64
+Replaces: libwf-utils0t64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: window rule utilities library for Wayfire
+ wf-utils provides the lexer, parser, condition and action machinery that
+ Wayfire uses to evaluate window rules.
+ .
+ Upstream ships it as a Wayfire subproject and has never released or tagged it,
+ so it is built from the revision Wayfire pins and versioned with Wayfire.
+ .
+ This package contains the shared library.
+
+Package: libwf-utils-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends:
+ libwf-utils0 (= ${binary:Version}),
+ ${misc:Depends},
+Description: window rule utilities library for Wayfire (development files)
+ wf-utils provides the lexer, parser, condition and action machinery that
+ Wayfire uses to evaluate window rules.
+ .
+ This package contains the headers and the pkg-config file.
+
+Package: libwf-touch-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+Description: touch gesture recognition library for Wayfire (development files)
+ wf-touch matches multi-finger touch and touchpad gestures for Wayfire and its
+ plugins. Upstream builds it as a static library only, so there is no runtime
+ package.
+ .
+ This package contains the headers and the static library.
+
 Package: wayfire
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: libglx-vendor, ${shlibs:Depends}, ${misc:Depends}
 Description: 3D wlroots-based Wayland compositor
  Wayfire is a Wayland compositor inspired by Compiz and built on wlroots. It
  aims to be customizable, extendable and lightweight without sacrificing its
@@ -59,12 +100,18 @@ Depends:
  wayfire (= ${binary:Version}),
  python3,
  libwf-config-dev,
+ libwf-touch-dev (= ${binary:Version}),
+ libwf-utils-dev (= ${binary:Version}),
  libwlroots-0.20-dev,
+ libcairo2-dev,
  libdrm-dev,
+ libgles-dev,
  libinput-dev,
+ libpango1.0-dev,
  libpixman-1-dev,
  libwayland-dev,
  libxkbcommon-dev,
+ libyyjson-dev,
  ${misc:Depends},
 Recommends:
  git,
@@ -74,4 +121,5 @@ Description: 3D wlroots-based Wayland compositor (development files)
  Wayfire is a Wayland compositor inspired by Compiz and built on wlroots.
  .
  This package contains the headers and the pkg-config file required to build
- out-of-tree Wayfire plugins, and wayfire-plugin, which builds and installs them.
+ out-of-tree Wayfire plugins, and wayfire-plugin, which builds and installs
+ them.

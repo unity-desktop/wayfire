@@ -6,14 +6,16 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 	dh $@ --buildsystem=meson
 
 # Use wlroots from the archive and our wf-config, never the bundled copies.
-# wf-json, wf-utils and wf-touch have no packages, so they build from subprojects/.
+# wf-json, wf-utils and wf-touch have no archive packages, so they build from
+# subprojects/; this source package publishes the wf-utils and wf-touch ones.
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		-Duse_system_wlroots=enabled \
 		-Duse_system_wfconfig=enabled \
 		-Dtests=disabled
 
-# wf-utils and the plugin helper libraries are private to the wayfire package.
+# The plugin helper libraries, such as libwayfire-blur-base.so, are private to
+# the wayfire package and have no SONAME package for dpkg-shlibdeps to name.
 override_dh_shlibdeps:
 	dh_shlibdeps -l$(CURDIR)/debian/wayfire/usr/lib/$(DEB_HOST_MULTIARCH)
 

@@ -1,3 +1,15 @@
+wayfire (0.11.0-2) stonking; urgency=medium
+
+  * wayfire-dev: add libcairo2-dev, libpango1.0-dev and libgles-dev, without
+    which pkg-config --cflags wayfire failed.
+  * Split the bundled subprojects into libwf-utils0, libwf-utils-dev and
+    libwf-touch-dev, as the archive's wayfire source does.
+  * wayfire-dev: depend on those two -dev packages and on libyyjson-dev.
+  * libwf-utils0: Conflicts/Replaces libwf-utils0t64.
+  * wayfire: Depends on libglx-vendor, matching the archive.
+
+ -- Muqtadir <contact@muqtxdir.com>  Mon, 28 Sep 2026 03:25:00 +0530
+
 wayfire (0.11.0-1) stonking; urgency=medium
 
   * Initial packaging, from the unity-desktop/wayfire fork (DEP-14:

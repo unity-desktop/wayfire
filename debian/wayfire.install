@@ -1,5 +1,4 @@
 usr/bin/wayfire
-usr/lib/*/libwf-utils.so.*
 usr/lib/*/libwayfire-*.so
 usr/lib/*/wayfire/
 usr/share/locale/
